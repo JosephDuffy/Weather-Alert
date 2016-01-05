@@ -85,6 +85,15 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
         return CGSize(width: 200, height: 200)
     }
 
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let itemsInSection = self.collectionView?.numberOfItemsInSection(indexPath.section) ?? 0
+
+        if indexPath.row == itemsInSection - 1 {
+            // Show the add new location interface
+            self.performSegueWithIdentifier("ShowAddNewWeatherLocation", sender: nil)
+        }
+    }
+
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {

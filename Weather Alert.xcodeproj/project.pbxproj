@@ -24,6 +24,8 @@
 		D9F2E0F11C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0EF1C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.xib */; };
 		D9F2E0F31C3BEF04003D64DE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F2E0F21C3BEF04003D64DE /* Alamofire.framework */; };
 		D9F2E0F41C3BEF04003D64DE /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9F2E0F21C3BEF04003D64DE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9F2E0F81C3C22BA003D64DE /* AddNewLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0F71C3C22BA003D64DE /* AddNewLocationTableViewController.swift */; };
+		D9F2E0FA1C3C30A5003D64DE /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0F91C3C30A5003D64DE /* Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		D9F2E0EE1C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewWeatherLocationCollectionViewCell.swift; sourceTree = "<group>"; };
 		D9F2E0EF1C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewWeatherLocationCollectionViewCell.xib; sourceTree = "<group>"; };
 		D9F2E0F21C3BEF04003D64DE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		D9F2E0F71C3C22BA003D64DE /* AddNewLocationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewLocationTableViewController.swift; sourceTree = "<group>"; };
+		D9F2E0F91C3C30A5003D64DE /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 				D9F2E0BE1C3BDF30003D64DE /* Assets.xcassets */,
 				D9F2E0C31C3BDF30003D64DE /* Info.plist */,
 				D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */,
+				D9F2E0F91C3C30A5003D64DE /* Config.plist */,
 			);
 			path = "Weather Alert";
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				D9F2E0E81C3BE5F8003D64DE /* WeatherLocationsCollectionViewController.swift */,
 				D9F2E0EA1C3BE67F003D64DE /* WeatherLocationViewController.swift */,
 				D9F2E0EE1C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.swift */,
+				D9F2E0F71C3C22BA003D64DE /* AddNewLocationTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +266,7 @@
 				D9F2E0BF1C3BDF30003D64DE /* Assets.xcassets in Resources */,
 				D9F2E0E71C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.xib in Resources */,
 				D9F2E0F11C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.xib in Resources */,
+				D9F2E0FA1C3C30A5003D64DE /* Config.plist in Resources */,
 				D9F2E0BA1C3BDF30003D64DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +291,7 @@
 				D9F2E0E21C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift in Sources */,
 				D9F2E0B51C3BDF30003D64DE /* AppDelegate.swift in Sources */,
 				D9F2E0E61C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.swift in Sources */,
+				D9F2E0F81C3C22BA003D64DE /* AddNewLocationTableViewController.swift in Sources */,
 				D9F2E0E91C3BE5F8003D64DE /* WeatherLocationsCollectionViewController.swift in Sources */,
 				D9F2E0ED1C3BE707003D64DE /* CoreDataManager.swift in Sources */,
 				D9F2E0E31C3BE29F003D64DE /* WeatherLocation.swift in Sources */,

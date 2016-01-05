@@ -12,8 +12,22 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static private(set) var instance: AppDelegate!
+
     var window: UIWindow?
 
+    internal lazy var openWeatherMapAPIKey: String = {
+        // Modified version of http://stackoverflow.com/a/26333916/657676
+        guard let path = NSBundle.mainBundle().pathForResource("Config", ofType: "plist"), dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else { return "INVALID_KEY" }
+
+        return dict["APIKey"] as? String ?? "INVALID_KEY"
+    }()
+
+    override init() {
+        super.init()
+
+        AppDelegate.instance = self
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
