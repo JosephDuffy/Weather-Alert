@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import CoreData
 
 class AddNewLocationTableViewController: UITableViewController {
 
@@ -41,6 +42,32 @@ class AddNewLocationTableViewController: UITableViewController {
         }
 
         return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let resultCities = self.resultCities {
+            if resultCities.count > indexPath.row {
+                let city = resultCities[indexPath.row]
+
+                let moc = CoreDataManager.sharedInstance.managedObjectContext
+                let entity = NSEntityDescription.entityForName("WeatherLocation", inManagedObjectContext: moc)!
+                let newWeatherLocation = WeatherLocation(entity: entity, insertIntoManagedObjectContext: moc)
+                newWeatherLocation.cityId = city.id
+                newWeatherLocation.name = city.name
+                newWeatherLocation.country = city.country
+                newWeatherLocation.lastUpdated = city.dataTimestamp
+                newWeatherLocation.windSpeed = city.windSpeed
+                newWeatherLocation.windDegree = city.windDegree
+
+                do {
+                    try CoreDataManager.sharedInstance.managedObjectContext.save()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                } catch {
+                    // TODO: Display error to users
+                    print(error)
+                }
+            }
+        }
     }
 
     func searchForText(text: String) {
@@ -118,25 +145,27 @@ extension AddNewLocationTableViewController: UISearchBarDelegate {
 private struct OpenWeatherMapCity {
     let id: Int
     let name: String
-    let countryCode: String
-    let windDegrees: Double
+    let country: String
+    let windDegree: Double
     let windSpeed: Double
+    let dataTimestamp: NSDate
     var displayName: String {
-        return "\(name), \(countryCode)"
+        return "\(name), \(country)"
     }
 
     init?(data: [String: AnyObject]) {
         guard let id = data["id"] as? Int else { return nil }
         guard let name = data["name"] as? String else { return nil }
-        guard let countryCode = (data["sys"] as? [String: String])?["country"] else { return nil }
+        guard let country = (data["sys"] as? [String: String])?["country"] else { return nil }
         guard let windData = data["wind"] as? [String: Double] else { return nil }
-        guard let windDegrees = windData["deg"] else { return nil }
+        guard let windDegree = windData["deg"] else { return nil }
         guard let windSpeed = windData["speed"] else { return nil }
 
         self.id = id
         self.name = name
-        self.countryCode = countryCode
-        self.windDegrees = windDegrees
+        self.country = country
+        self.windDegree = windDegree
         self.windSpeed = windSpeed
+        self.dataTimestamp = NSDate()
     }
 }

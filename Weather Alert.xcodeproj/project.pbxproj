@@ -75,6 +75,7 @@
 		D9F2E0F21C3BEF04003D64DE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		D9F2E0F71C3C22BA003D64DE /* AddNewLocationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewLocationTableViewController.swift; sourceTree = "<group>"; };
 		D9F2E0F91C3C30A5003D64DE /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		D9F2E0FB1C3C3388003D64DE /* Weather_Alert 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Weather_Alert 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,9 +508,10 @@
 		D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D9F2E0FB1C3C3388003D64DE /* Weather_Alert 2.xcdatamodel */,
 				D9F2E0BC1C3BDF30003D64DE /* Weather_Alert.xcdatamodel */,
 			);
-			currentVersion = D9F2E0BC1C3BDF30003D64DE /* Weather_Alert.xcdatamodel */;
+			currentVersion = D9F2E0FB1C3C3388003D64DE /* Weather_Alert 2.xcdatamodel */;
 			path = Weather_Alert.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

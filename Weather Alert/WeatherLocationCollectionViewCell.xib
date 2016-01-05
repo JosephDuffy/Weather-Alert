@@ -20,32 +20,51 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%speed%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="CGS-0w-Ynz">
-                        <rect key="frame" x="8" y="171.5" width="184" height="20.5"/>
+                        <rect key="frame" x="8" y="171" width="184" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I3O-MJ-18E">
-                        <rect key="frame" x="8" y="36.5" width="184" height="127"/>
-                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%degree%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-3u-Biq">
+                        <rect key="frame" x="8" y="143" width="184" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="⬆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVT-YK-kZE">
+                        <rect key="frame" x="8" y="37" width="184" height="98"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="90"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-at-mJS">
+                        <rect key="frame" x="90" y="73" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="zk3-Rb-aXX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="18C-yb-1ID"/>
                 <constraint firstAttribute="trailing" secondItem="zk3-Rb-aXX" secondAttribute="trailing" constant="8" id="2tp-Mc-h58"/>
-                <constraint firstAttribute="trailing" secondItem="I3O-MJ-18E" secondAttribute="trailing" constant="8" id="5XS-Su-B9Q"/>
+                <constraint firstAttribute="trailing" secondItem="fQV-3u-Biq" secondAttribute="trailing" constant="8" id="7vV-kb-x5h"/>
+                <constraint firstItem="nVT-YK-kZE" firstAttribute="top" secondItem="zk3-Rb-aXX" secondAttribute="bottom" constant="8" symbolic="YES" id="AB9-eP-2as"/>
                 <constraint firstItem="zk3-Rb-aXX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Gja-8q-vpr"/>
+                <constraint firstAttribute="trailing" secondItem="nVT-YK-kZE" secondAttribute="trailing" constant="8" id="Mxs-cy-M8v"/>
                 <constraint firstAttribute="bottom" secondItem="CGS-0w-Ynz" secondAttribute="bottom" constant="8" id="PZ0-4k-x2f"/>
                 <constraint firstItem="CGS-0w-Ynz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="QlS-Z3-XKG"/>
-                <constraint firstItem="I3O-MJ-18E" firstAttribute="top" secondItem="zk3-Rb-aXX" secondAttribute="bottom" constant="8" symbolic="YES" id="i3D-wk-um8"/>
+                <constraint firstItem="fQV-3u-Biq" firstAttribute="top" secondItem="nVT-YK-kZE" secondAttribute="bottom" constant="8" symbolic="YES" id="YkT-vh-ZXC"/>
+                <constraint firstItem="nVT-YK-kZE" firstAttribute="top" secondItem="Ibc-at-mJS" secondAttribute="bottom" constant="-56" id="hi3-Rc-46x"/>
                 <constraint firstAttribute="trailing" secondItem="CGS-0w-Ynz" secondAttribute="trailing" constant="8" id="obZ-vg-S6y"/>
-                <constraint firstItem="CGS-0w-Ynz" firstAttribute="top" secondItem="I3O-MJ-18E" secondAttribute="bottom" constant="8" symbolic="YES" id="x0r-72-Zcl"/>
-                <constraint firstItem="I3O-MJ-18E" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="zWl-g9-AOn"/>
+                <constraint firstItem="CGS-0w-Ynz" firstAttribute="top" secondItem="fQV-3u-Biq" secondAttribute="bottom" constant="8" symbolic="YES" id="tzw-nY-EFt"/>
+                <constraint firstItem="fQV-3u-Biq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="uGg-Cj-Kym"/>
+                <constraint firstItem="Ibc-at-mJS" firstAttribute="leading" secondItem="nVT-YK-kZE" secondAttribute="trailing" constant="-102" id="w3k-q0-dWF"/>
+                <constraint firstItem="nVT-YK-kZE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="xL4-G7-ucw"/>
             </constraints>
             <size key="customSize" width="200" height="200"/>
             <connections>
-                <outlet property="imageView" destination="I3O-MJ-18E" id="cgB-vb-CGS"/>
+                <outlet property="activityIndicator" destination="Ibc-at-mJS" id="Wte-3t-aNt"/>
+                <outlet property="degreeArrowLabel" destination="nVT-YK-kZE" id="p9D-aY-EVC"/>
+                <outlet property="degreeLabel" destination="fQV-3u-Biq" id="m9O-Ve-0cs"/>
                 <outlet property="locationNameLabel" destination="zk3-Rb-aXX" id="0Ac-SU-F1a"/>
                 <outlet property="speedLabel" destination="CGS-0w-Ynz" id="cDS-Bb-8nD"/>
             </connections>

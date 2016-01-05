@@ -16,5 +16,6 @@ extension WeatherLocation {
 
     @NSManaged var cityId: NSNumber?
     @NSManaged var name: String?
+    @NSManaged var country: String?
 
 }

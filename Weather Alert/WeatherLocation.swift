@@ -12,7 +12,11 @@ import CoreData
 
 class WeatherLocation: NSManagedObject {
 
+    var lastUpdated: NSDate?
     var windSpeed: Double?
     var windDegree: Double?
 
+    var displayName: String {
+        return "\(self.name), \(self.country)"
+    }
 }
