@@ -73,9 +73,9 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let weatherLocation = sender as? WeatherLocation where segue.identifier == "ShowWeatherLocation" {
             guard let secondaryAsNavController = segue.destinationViewController as? UINavigationController else { return }
-            guard let scanViewController = secondaryAsNavController.topViewController as? WeatherLocationViewController else { return }
+            guard let weatherLocationViewController = secondaryAsNavController.topViewController as? WeatherLocationViewController else { return }
 
-            return scanViewController.weatherLocation = weatherLocation
+            return weatherLocationViewController.weatherLocation = weatherLocation
         }
     }
 
@@ -135,7 +135,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
                 // Show the add new location interface
                 performSegueWithIdentifier("ShowAddNewWeatherLocation", sender: nil)
             } else if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
-                performSegueWithIdentifier("ShowWeatherLocation", sender: weatherLocation)
+                setDisplayedWeatherLocation(weatherLocation)
             }
         }
     }
@@ -152,6 +152,18 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     }
 
     // MARK:- Management
+
+    private func setDisplayedWeatherLocation(weatherLocation: WeatherLocation?) {
+        if let navigationController = splitViewController?.viewControllers.last as? UINavigationController where splitViewController?.viewControllers.count == 2 {
+            // Set directly
+            guard let weatherLocationViewController = navigationController.topViewController as? WeatherLocationViewController else { return }
+
+            return weatherLocationViewController.weatherLocation = weatherLocation
+        } else {
+            // Set via segue
+            performSegueWithIdentifier("ShowWeatherLocation", sender: weatherLocation)
+        }
+    }
 
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
@@ -211,6 +223,17 @@ extension WeatherLocationsCollectionViewController: NSFetchedResultsControllerDe
             self.collectionView?.insertItemsAtIndexPaths([newIndexPath!])
         case .Delete:
             self.collectionView?.deleteItemsAtIndexPaths([indexPath!])
+
+            if let navigationController = splitViewController?.viewControllers.last as? UINavigationController where splitViewController?.viewControllers.count == 2 {
+                // Set directly
+                guard let weatherLocationViewController = navigationController.topViewController as? WeatherLocationViewController else { return }
+
+                if let weatherLocation = anObject as? WeatherLocation {
+                    if weatherLocationViewController.weatherLocation == weatherLocation {
+                        weatherLocationViewController.weatherLocation = nil
+                    }
+                }
+            }
         case .Move:
             self.collectionView?.moveItemAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
         case .Update:
