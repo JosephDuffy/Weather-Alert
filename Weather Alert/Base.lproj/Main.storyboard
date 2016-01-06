@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Add New Location-->
@@ -78,16 +79,17 @@
                     <navigationItem key="navigationItem" title="Locations" id="fz9-MG-T1H"/>
                     <connections>
                         <segue destination="BbZ-eP-J6z" kind="presentation" identifier="ShowAddNewWeatherLocation" modalPresentationStyle="formSheet" id="bcE-Hq-YCs"/>
+                        <segue destination="xw6-NB-aOR" kind="show" identifier="ShowWeatherLocation" id="aQd-fS-tjK"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4aK-ee-fkt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2181" y="-222"/>
         </scene>
-        <!--View Controller-->
+        <!--%location%-->
         <scene sceneID="pNV-jA-Isc">
             <objects>
-                <viewController id="h5w-q1-ffi" sceneMemberID="viewController">
+                <viewController id="h5w-q1-ffi" customClass="WeatherLocationViewController" customModule="Weather_Alert" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0RM-SW-rzO"/>
                         <viewControllerLayoutGuide type="bottom" id="CDh-tj-EdK"/>
@@ -95,9 +97,24 @@
                     <view key="view" contentMode="scaleToFill" id="3Xd-SZ-1uz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rzq-cC-D04">
+                                <rect key="frame" x="0.0" y="360" width="600" height="240"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="rzq-cC-D04" secondAttribute="trailing" id="3gP-UJ-GUd"/>
+                            <constraint firstItem="rzq-cC-D04" firstAttribute="height" secondItem="3Xd-SZ-1uz" secondAttribute="height" multiplier="0.4" id="HIn-Gz-byT"/>
+                            <constraint firstItem="rzq-cC-D04" firstAttribute="leading" secondItem="3Xd-SZ-1uz" secondAttribute="leading" id="N7d-DI-2JB"/>
+                            <constraint firstItem="rzq-cC-D04" firstAttribute="width" secondItem="3Xd-SZ-1uz" secondAttribute="width" id="nha-ad-hUq"/>
+                            <constraint firstItem="CDh-tj-EdK" firstAttribute="top" secondItem="rzq-cC-D04" secondAttribute="bottom" id="oMR-nH-goN"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="fKD-8Y-CHW"/>
+                    <navigationItem key="navigationItem" title="%location%" id="fKD-8Y-CHW"/>
+                    <connections>
+                        <outlet property="mapView" destination="rzq-cC-D04" id="8pV-bk-spP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5n1-gg-Xi2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,4 +186,7 @@
             <point key="canvasLocation" x="2181" y="-971"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aQd-fS-tjK"/>
+    </inferredMetricsTieBreakers>
 </document>

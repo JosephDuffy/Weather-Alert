@@ -7,31 +7,32 @@
 //
 
 import UIKit
+import MapKit
 
 class WeatherLocationViewController: UIViewController {
 
-    var weatherLocation: WeatherLocation?
+    @IBOutlet weak var mapView: MKMapView!
+
+    var weatherLocation: WeatherLocation? {
+        didSet {
+            if isViewLoaded() {
+                setup()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setup()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    private func setup() {
+        assert(isViewLoaded(), "setup may only be called after the view is loaded")
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let weatherLocation = weatherLocation {
+            self.navigationItem.title = weatherLocation.name!
+        }
     }
-    */
 
 }
