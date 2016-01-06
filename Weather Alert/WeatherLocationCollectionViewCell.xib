@@ -51,9 +51,9 @@
             <size key="customSize" width="200" height="200"/>
             <connections>
                 <outlet property="activityIndicator" destination="Ibc-at-mJS" id="Wte-3t-aNt"/>
-                <outlet property="degreeLabel" destination="fQV-3u-Biq" id="m9O-Ve-0cs"/>
                 <outlet property="locationNameLabel" destination="zk3-Rb-aXX" id="0Ac-SU-F1a"/>
                 <outlet property="speedLabel" destination="CGS-0w-Ynz" id="cDS-Bb-8nD"/>
+                <outlet property="temperatureLabel" destination="fQV-3u-Biq" id="5oE-RT-FnW"/>
             </connections>
             <point key="canvasLocation" x="462" y="430"/>
         </collectionViewCell>

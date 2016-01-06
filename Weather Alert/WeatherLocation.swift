@@ -17,7 +17,7 @@ class WeatherLocation: NSManagedObject {
     var windDegree: Float?
 
     var displayName: String {
-        return "\(self.name), \(self.country)"
+        return "\(self.name!), \(self.country!)"
     }
     var compassDesignation: String? {
         if let windDegree = self.windDegree {
@@ -91,6 +91,10 @@ class WeatherLocation: NSManagedObject {
                         }
                     }
 
+                    if let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Float {
+                        self?.temperature = NSNumber(float: temperature)
+                    }
+
                     self?.lastUpdated = NSDate()
                     self?.isLoadingData = false
                     callback?(nil)
@@ -103,5 +107,39 @@ class WeatherLocation: NSManagedObject {
                 callback?(error)
             }
         }
+    }
+}
+
+extension WeatherLocation {
+    static func fromData(data: [String : AnyObject], moc: NSManagedObjectContext? = nil) -> WeatherLocation? {
+        guard let id = data["id"] as? Int else { return nil }
+        guard let name = data["name"] as? String else { return nil }
+        guard let country = (data["sys"] as? [String: String])?["country"] else { return nil }
+        guard let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Float else { return nil }
+        guard let windData = data["wind"] as? [String: Float] else { return nil }
+        guard let windDegree = windData["deg"] else { return nil }
+        guard let windSpeed = windData["speed"] else { return nil }
+        guard let weathersData = data["weather"] as? [[String : AnyObject]] else { return nil }
+
+        let entity = NSEntityDescription.entityForName("WeatherLocation", inManagedObjectContext: moc ?? CoreDataManager.sharedInstance.managedObjectContext)!
+        let newWeatherLocation = WeatherLocation(entity: entity, insertIntoManagedObjectContext: moc)
+        newWeatherLocation.cityId = id
+        newWeatherLocation.name = name
+        newWeatherLocation.country = country
+        newWeatherLocation.temperature = temperature
+        newWeatherLocation.lastUpdated = NSDate()
+        newWeatherLocation.windSpeed = windSpeed
+        newWeatherLocation.windDegree = windDegree
+
+        var weathers = Set<Weather>()
+        for weatherData in weathersData {
+            if let weather = Weather.fromData(weatherData) {
+                weathers.insert(weather)
+            }
+        }
+
+        newWeatherLocation.weathers = weathers
+
+        return newWeatherLocation
     }
 }

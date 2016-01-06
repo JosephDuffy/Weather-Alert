@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D91D409D1C3D7275004CEE81 /* Weather+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D409B1C3D7275004CEE81 /* Weather+CoreDataProperties.swift */; };
+		D91D409E1C3D7275004CEE81 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D409C1C3D7275004CEE81 /* Weather.swift */; };
 		D9F2E0B51C3BDF30003D64DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0B41C3BDF30003D64DE /* AppDelegate.swift */; };
 		D9F2E0BA1C3BDF30003D64DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0B81C3BDF30003D64DE /* Main.storyboard */; };
 		D9F2E0BD1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */; };
@@ -53,6 +55,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D91D409A1C3D713B004CEE81 /* Weather_Alert 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Weather_Alert 3.xcdatamodel"; sourceTree = "<group>"; };
+		D91D409B1C3D7275004CEE81 /* Weather+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Weather+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D91D409C1C3D7275004CEE81 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		D9F2E0B11C3BDF30003D64DE /* Weather Alert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Alert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F2E0B41C3BDF30003D64DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F2E0B91C3BDF30003D64DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,6 +148,8 @@
 		D9F2E0D71C3BE0EF003D64DE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D91D409B1C3D7275004CEE81 /* Weather+CoreDataProperties.swift */,
+				D91D409C1C3D7275004CEE81 /* Weather.swift */,
 				D9F2E0E01C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift */,
 				D9F2E0E11C3BE29F003D64DE /* WeatherLocation.swift */,
 				D9F2E0EC1C3BE707003D64DE /* CoreDataManager.swift */,
@@ -289,6 +296,8 @@
 				D9F2E0F01C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.swift in Sources */,
 				D9F2E0EB1C3BE67F003D64DE /* WeatherLocationViewController.swift in Sources */,
 				D9F2E0BD1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld in Sources */,
+				D91D409D1C3D7275004CEE81 /* Weather+CoreDataProperties.swift in Sources */,
+				D91D409E1C3D7275004CEE81 /* Weather.swift in Sources */,
 				D9F2E0E21C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift in Sources */,
 				D9F2E0B51C3BDF30003D64DE /* AppDelegate.swift in Sources */,
 				D9F2E0E61C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.swift in Sources */,
@@ -493,6 +502,7 @@
 				D9F2E0D31C3BDF30003D64DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D9F2E0D41C3BDF30003D64DE /* Build configuration list for PBXNativeTarget "Weather AlertTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +511,7 @@
 				D9F2E0D61C3BDF30003D64DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -508,10 +519,11 @@
 		D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D91D409A1C3D713B004CEE81 /* Weather_Alert 3.xcdatamodel */,
 				D9F2E0FB1C3C3388003D64DE /* Weather_Alert 2.xcdatamodel */,
 				D9F2E0BC1C3BDF30003D64DE /* Weather_Alert.xcdatamodel */,
 			);
-			currentVersion = D9F2E0FB1C3C3388003D64DE /* Weather_Alert 2.xcdatamodel */;
+			currentVersion = D91D409A1C3D713B004CEE81 /* Weather_Alert 3.xcdatamodel */;
 			path = Weather_Alert.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -1,5 +1,5 @@
 //
-//  WeatherLocation+CoreDataProperties.swift
+//  Weather+CoreDataProperties.swift
 //  Weather Alert
 //
 //  Created by Joseph Duffy on 06/01/2016.
@@ -12,12 +12,12 @@
 import Foundation
 import CoreData
 
-extension WeatherLocation {
+extension Weather {
 
-    @NSManaged var cityId: NSNumber?
-    @NSManaged var country: String?
-    @NSManaged var name: String?
-    @NSManaged var temperature: NSNumber?
-    @NSManaged var weathers: NSSet?
+    @NSManaged var id: NSNumber?
+    @NSManaged var main: String?
+    @NSManaged var descriptionText: String?
+    @NSManaged var icon: String?
+    @NSManaged var weatherLocation: WeatherLocation?
 
 }

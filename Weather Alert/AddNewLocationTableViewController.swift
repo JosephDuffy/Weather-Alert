@@ -15,7 +15,7 @@ class AddNewLocationTableViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
     private weak var activeRequest: Request?
-    private var resultCities: [OpenWeatherMapCity]?
+    private var resultCities: [WeatherLocation]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,15 +49,13 @@ class AddNewLocationTableViewController: UITableViewController {
             if resultCities.count > indexPath.row {
                 let city = resultCities[indexPath.row]
 
-                let moc = CoreDataManager.sharedInstance.managedObjectContext
-                let entity = NSEntityDescription.entityForName("WeatherLocation", inManagedObjectContext: moc)!
-                let newWeatherLocation = WeatherLocation(entity: entity, insertIntoManagedObjectContext: moc)
-                newWeatherLocation.cityId = city.id
-                newWeatherLocation.name = city.name
-                newWeatherLocation.country = city.country
-                newWeatherLocation.lastUpdated = city.dataTimestamp
-                newWeatherLocation.windSpeed = city.windSpeed
-                newWeatherLocation.windDegree = city.windDegree
+                // Add the chosen city to the managed object context so that
+                // it is saved
+                CoreDataManager.sharedInstance.managedObjectContext.insertObject(city)
+                // Also add the weathers
+                for weather in city.weathers as! Set<Weather> {
+                    CoreDataManager.sharedInstance.managedObjectContext.insertObject(weather)
+                }
 
                 do {
                     try CoreDataManager.sharedInstance.managedObjectContext.save()
@@ -73,6 +71,7 @@ class AddNewLocationTableViewController: UITableViewController {
     func searchForText(text: String) {
         if let activeRequest = self.activeRequest {
             activeRequest.cancel()
+            self.activeRequest = nil
         }
 
         // API returns 404 for text < 3 characters
@@ -106,17 +105,17 @@ class AddNewLocationTableViewController: UITableViewController {
             case .Success(let JSON):
                 if let data = JSON as? [String: AnyObject] {
                     if let citiesData = data["list"] as? [[String: AnyObject]] {
-                        var cities = [OpenWeatherMapCity]()
+                        var locations = [WeatherLocation]()
 
                         for cityData in citiesData {
-                            if let city = OpenWeatherMapCity(data: cityData) {
-                                cities.append(city)
+                            if let location = WeatherLocation.fromData(cityData, moc: nil) {
+                                locations.append(location)
                             } else {
                                 print("Failed to parse city")
                             }
                         }
 
-                        self?.resultCities = cities
+                        self?.resultCities = locations
 
                         // Display the data
                         self?.tableView.reloadData()
@@ -127,8 +126,11 @@ class AddNewLocationTableViewController: UITableViewController {
                     print("Failed to get JSON data")
                 }
             case .Failure(let error):
-                // TODO: Display to the user
-                print("Request failed with error: \(error)")
+                // Ignore cancellations
+                if !(error.code == NSURLErrorCancelled && error.domain == NSURLErrorDomain) {
+                    // TODO: Display to the user
+                    print("Request failed with error: \(error)")
+                }
             }
         }
     }
@@ -142,33 +144,5 @@ class AddNewLocationTableViewController: UITableViewController {
 extension AddNewLocationTableViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         searchForText(searchText)
-    }
-}
-
-private struct OpenWeatherMapCity {
-    let id: Int
-    let name: String
-    let country: String
-    let windDegree: Float
-    let windSpeed: Float
-    let dataTimestamp: NSDate
-    var displayName: String {
-        return "\(name), \(country)"
-    }
-
-    init?(data: [String: AnyObject]) {
-        guard let id = data["id"] as? Int else { return nil }
-        guard let name = data["name"] as? String else { return nil }
-        guard let country = (data["sys"] as? [String: String])?["country"] else { return nil }
-        guard let windData = data["wind"] as? [String: Float] else { return nil }
-        guard let windDegree = windData["deg"] else { return nil }
-        guard let windSpeed = windData["speed"] else { return nil }
-
-        self.id = id
-        self.name = name
-        self.country = country
-        self.windDegree = windDegree
-        self.windSpeed = windSpeed
-        self.dataTimestamp = NSDate()
     }
 }
