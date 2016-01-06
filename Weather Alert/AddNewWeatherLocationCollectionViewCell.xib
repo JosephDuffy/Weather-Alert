@@ -14,25 +14,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="RPO-Tm-YMH">
-                        <rect key="frame" x="8" y="171" width="184" height="21"/>
+                        <rect key="frame" x="8" y="171" width="184" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-pZ-2r1">
-                        <rect key="frame" x="8" y="8" width="184" height="155"/>
-                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdp-1O-SbZ">
+                        <rect key="frame" x="8" y="8" width="184" height="155.5"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                            <bool key="isElement" value="NO"/>
+                        </accessibility>
+                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="150"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="JHr-pZ-2r1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="9LT-Zd-PuU"/>
+                <constraint firstItem="cdp-1O-SbZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="0KW-wN-EMk"/>
                 <constraint firstItem="RPO-Tm-YMH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="AfK-H2-5ge"/>
-                <constraint firstAttribute="trailing" secondItem="JHr-pZ-2r1" secondAttribute="trailing" constant="8" id="Eak-xE-oBw"/>
+                <constraint firstItem="RPO-Tm-YMH" firstAttribute="top" secondItem="cdp-1O-SbZ" secondAttribute="bottom" constant="8" symbolic="YES" id="Q3m-zG-8DI"/>
                 <constraint firstAttribute="trailing" secondItem="RPO-Tm-YMH" secondAttribute="trailing" constant="8" id="XHW-VJ-RBj"/>
-                <constraint firstItem="JHr-pZ-2r1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="cIA-tg-TD6"/>
-                <constraint firstItem="RPO-Tm-YMH" firstAttribute="top" secondItem="JHr-pZ-2r1" secondAttribute="bottom" constant="8" symbolic="YES" id="jki-mE-98i"/>
+                <constraint firstAttribute="trailing" secondItem="cdp-1O-SbZ" secondAttribute="trailing" constant="8" id="YdT-Ie-bGz"/>
                 <constraint firstAttribute="bottom" secondItem="RPO-Tm-YMH" secondAttribute="bottom" constant="8" id="ki4-BO-MD2"/>
+                <constraint firstItem="cdp-1O-SbZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="r4K-gr-EqO"/>
             </constraints>
             <size key="customSize" width="200" height="200"/>
             <point key="canvasLocation" x="504" y="528"/>
