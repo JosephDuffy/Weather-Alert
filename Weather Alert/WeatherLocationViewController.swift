@@ -33,6 +33,34 @@ class WeatherLocationViewController: UIViewController {
         assert(isViewLoaded(), "setup may only be called after the view is loaded")
 
         if let weatherLocation = weatherLocation {
+            mapView.hidden = false
+            // Remove all annotations
+            mapView.removeAnnotations(mapView.annotations)
+
+            if let location = weatherLocation.location {
+                let region = MKCoordinateRegionMakeWithDistance(location, 50000, 50000)
+                mapView.setRegion(region, animated: true)
+
+                let pin = MKPointAnnotation()
+                pin.coordinate = location
+                mapView.addAnnotation(pin)
+            }
+
+            populateLabels()
+
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "populateLabels", name: WeatherLocationDidReloadDataNotification, object: weatherLocation)
+        } else {
+            mapView.hidden = true
+            temperatureWeatherDescriptionLabel.text = nil
+            windLabel.text = nil
+            navigationItem.title = "No Location Selected"
+
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: WeatherLocationDidReloadDataNotification, object: nil)
+        }
+    }
+
+    private func populateLabels() {
+        if let weatherLocation = weatherLocation {
             navigationItem.title = weatherLocation.name!
 
             var temperatureWeatherDescriptionText = ""
@@ -49,7 +77,7 @@ class WeatherLocationViewController: UIViewController {
             }
 
             temperatureWeatherDescriptionLabel.text = temperatureWeatherDescriptionText
-            
+
             if let windSpeed = weatherLocation.windSpeed {
                 if let compassDesignation = weatherLocation.compassDesignation {
                     windLabel.text = "\(compassDesignation) - \(windSpeed) m/s"
@@ -59,24 +87,6 @@ class WeatherLocationViewController: UIViewController {
             } else {
                 windLabel.text = "--"
             }
-
-            mapView.hidden = false
-            // Remove all annotations
-            mapView.removeAnnotations(mapView.annotations)
-
-            if let location = weatherLocation.location {
-                let region = MKCoordinateRegionMakeWithDistance(location, 50000, 50000)
-                mapView.setRegion(region, animated: true)
-
-                let pin = MKPointAnnotation()
-                pin.coordinate = location
-                mapView.addAnnotation(pin)
-            }
-        } else {
-            mapView.hidden = true
-            temperatureWeatherDescriptionLabel.text = nil
-            windLabel.text = nil
-            navigationItem.title = "No Location Selected"
         }
     }
 

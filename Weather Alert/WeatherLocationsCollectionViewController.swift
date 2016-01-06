@@ -134,6 +134,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
             if indexPath.section == collectionView.numberOfSections() - 1 {
                 // Show the add new location interface
                 performSegueWithIdentifier("ShowAddNewWeatherLocation", sender: nil)
+                collectionView.deselectItemAtIndexPath(indexPath, animated: true)
             } else if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
                 setDisplayedWeatherLocation(weatherLocation)
             }
@@ -168,6 +169,15 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
+        if let selectedIndexPaths = collectionView?.indexPathsForSelectedItems() {
+            // This removed the highlighted colour when setting editing and
+            // does not restore it. This could be improved by restoring, but
+            // the index paths may change so this will be left for the future
+            for selectedIndexPath in selectedIndexPaths {
+                collectionView?.deselectItemAtIndexPath(selectedIndexPath, animated: false)
+            }
+        }
+
         if !editing {
             selectedWeatherLocations = []
         }
@@ -188,6 +198,10 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "reloadWeatherData")
             // Only enable reload button when there are added weather locations
             navigationItem.leftBarButtonItem?.enabled = collectionView?.numberOfSections() > 1
+
+            let itemCount = fetchedResultsController.fetchedObjects?.count ?? 0
+            navigationItem.leftBarButtonItem?.enabled = itemCount > 0
+            navigationItem.rightBarButtonItem?.enabled = itemCount > 0
         }
     }
 
@@ -221,6 +235,7 @@ extension WeatherLocationsCollectionViewController: NSFetchedResultsControllerDe
         switch type {
         case .Insert:
             self.collectionView?.insertItemsAtIndexPaths([newIndexPath!])
+            updateBarButton()
         case .Delete:
             self.collectionView?.deleteItemsAtIndexPaths([indexPath!])
 
@@ -234,6 +249,8 @@ extension WeatherLocationsCollectionViewController: NSFetchedResultsControllerDe
                     }
                 }
             }
+
+            updateBarButton()
         case .Move:
             self.collectionView?.moveItemAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
         case .Update:
