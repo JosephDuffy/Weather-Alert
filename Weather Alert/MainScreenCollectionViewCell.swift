@@ -10,6 +10,12 @@ import UIKit
 
 class MainScreenCollectionViewCell: UICollectionViewCell {
 
+    override var selected: Bool {
+        didSet {
+            self.backgroundColor = selected ? .lightGrayColor() : nil
+        }
+    }
+
     override var highlighted: Bool {
         didSet {
             self.backgroundColor = highlighted ? .lightGrayColor() : nil
