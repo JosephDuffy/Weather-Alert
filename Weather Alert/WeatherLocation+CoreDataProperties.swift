@@ -18,5 +18,7 @@ extension WeatherLocation {
     @NSManaged var country: String?
     @NSManaged var name: String?
     @NSManaged var temperature: NSNumber?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longitude: NSNumber?
 
 }

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Alamofire
+import MapKit
 
 let WeatherLocationDidReloadDataNotification = "WeatherLocationDidReloadData"
 
@@ -18,6 +19,13 @@ class WeatherLocation: NSManagedObject {
     var windSpeed: Float?
     var windDegree: Float?
     var weathers: [Weather]?
+    var location: CLLocationCoordinate2D? {
+        if let latitude = self.latitude?.doubleValue, longitude = self.longitude?.doubleValue {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        } else {
+            return nil
+        }
+    }
 
     var displayName: String {
         return "\(self.name!), \(self.country!)"
@@ -108,6 +116,13 @@ class WeatherLocation: NSManagedObject {
                         self?.weathers = weathers
                     }
 
+                    if let location = data["coord"] as? [String : Double] {
+                        if let latitude = location["lat"], longitude = location["lon"] {
+                            self?.latitude = latitude
+                            self?.longitude = longitude
+                        }
+                    }
+
                     self?.lastUpdated = NSDate()
                     self?.isLoadingData = false
 
@@ -143,6 +158,13 @@ extension WeatherLocation {
         newWeatherLocation.lastUpdated = NSDate()
         newWeatherLocation.windSpeed = windSpeed
         newWeatherLocation.windDegree = windDegree
+
+        if let location = data["coord"] as? [String : Double] {
+            if let latitude = location["lat"], longitude = location["lon"] {
+                newWeatherLocation.latitude = latitude
+                newWeatherLocation.longitude = longitude
+            }
+        }
 
         var weathers = [Weather]()
         for weatherData in weathersData {
