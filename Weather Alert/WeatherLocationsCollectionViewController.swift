@@ -35,6 +35,20 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 
         do {
             try fetchedResultsController.performFetch()
+
+            if let weatherLocations = fetchedResultsController.fetchedObjects as? [WeatherLocation] {
+                for weatherLocation in weatherLocations {
+                    guard weatherLocation.isLoadingData == false else { return }
+
+                    if weatherLocation.lastUpdated == nil {
+                        weatherLocation.reloadData {[weak self] error in
+                            if let indexPath = fetchedResultsController.indexPathForObject(weatherLocation) {
+                                self?.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                            }
+                        }
+                    }
+                }
+            }
         } catch {
             print("Error performing fetch: \(error)")
         }

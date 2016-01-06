@@ -29,13 +29,21 @@ class WeatherLocationCollectionViewCell: UICollectionViewCell {
 
     private func setup() {
         if let weatherLocation = self.weatherLocation {
+            weatherLocation.isLoadingData ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+            
             locationNameLabel.text = weatherLocation.name ?? "--"
-            speedLabel.text = weatherLocation.windSpeed?.description ?? "--"
+            if let windSpeed = weatherLocation.windSpeed {
+                // Units are in metric. See: http://openweathermap.org/weather-data
+                speedLabel.text = "\(windSpeed) m/s"
+            } else {
+                speedLabel.text = "--"
+            }
+            degreeLabel.text = weatherLocation.compassDesignation ?? "--"
 
             if let degree = weatherLocation.windDegree {
-                let rotaionRadians: CGFloat = CGFloat(M_PI * degree) / CGFloat(180)
+                let rotaionRadians: CGFloat = CGFloat(Float(M_PI) * degree) / CGFloat(180)
                 degreeArrowLabel.transform = CGAffineTransformMakeRotation(rotaionRadians)
-                degreeLabel.text = "\(degree)°"
+
             }
         }
     }

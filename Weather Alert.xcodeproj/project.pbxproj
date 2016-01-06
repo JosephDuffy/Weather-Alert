@@ -164,8 +164,8 @@
 		D9F2E0D91C3BE0FE003D64DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D9F2E0E41C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.swift */,
 				D9F2E0E81C3BE5F8003D64DE /* WeatherLocationsCollectionViewController.swift */,
+				D9F2E0E41C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.swift */,
 				D9F2E0EA1C3BE67F003D64DE /* WeatherLocationViewController.swift */,
 				D9F2E0EE1C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.swift */,
 				D9F2E0F71C3C22BA003D64DE /* AddNewLocationTableViewController.swift */,

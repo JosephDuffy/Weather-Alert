@@ -14,7 +14,7 @@ class AddNewLocationTableViewController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
 
-    private var activeRequest: Request?
+    private weak var activeRequest: Request?
     private var resultCities: [OpenWeatherMapCity]?
 
     override func viewDidLoad() {
@@ -87,6 +87,7 @@ class AddNewLocationTableViewController: UITableViewController {
         let request = Alamofire.request(.GET, "http://api.openweathermap.org/data/2.5/find", parameters: [
             "q": text,
             "mode": "like",
+            "units": "metric",
             "APPID": AppDelegate.instance.openWeatherMapAPIKey
             ])
         self.activeRequest = request
@@ -98,6 +99,8 @@ class AddNewLocationTableViewController: UITableViewController {
             // the ammount of processing required, helping improve
             // battery usage and overall performance
             guard self != nil else { return }
+
+            self?.activeRequest = nil
 
             switch response.result {
             case .Success(let JSON):
@@ -146,8 +149,8 @@ private struct OpenWeatherMapCity {
     let id: Int
     let name: String
     let country: String
-    let windDegree: Double
-    let windSpeed: Double
+    let windDegree: Float
+    let windSpeed: Float
     let dataTimestamp: NSDate
     var displayName: String {
         return "\(name), \(country)"
@@ -157,7 +160,7 @@ private struct OpenWeatherMapCity {
         guard let id = data["id"] as? Int else { return nil }
         guard let name = data["name"] as? String else { return nil }
         guard let country = (data["sys"] as? [String: String])?["country"] else { return nil }
-        guard let windData = data["wind"] as? [String: Double] else { return nil }
+        guard let windData = data["wind"] as? [String: Float] else { return nil }
         guard let windDegree = windData["deg"] else { return nil }
         guard let windSpeed = windData["speed"] else { return nil }
 
