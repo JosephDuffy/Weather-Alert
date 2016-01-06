@@ -117,6 +117,10 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
         return CGSize(width: 150, height: 150)
     }
 
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+    }
+
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if editing {
             if indexPathIsForAddNewCell(indexPath) {
