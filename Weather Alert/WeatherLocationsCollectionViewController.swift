@@ -38,25 +38,35 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 
         do {
             try fetchedResultsController.performFetch()
-
-            if let weatherLocations = fetchedResultsController.fetchedObjects as? [WeatherLocation] {
-                for weatherLocation in weatherLocations {
-                    guard weatherLocation.isLoadingData == false else { return }
-
-                    if weatherLocation.lastUpdated == nil {
-                        weatherLocation.reloadData {[weak self] error in
-                            if let indexPath = fetchedResultsController.indexPathForObject(weatherLocation) {
-                                self?.collectionView?.reloadItemsAtIndexPaths([indexPath])
-                            }
-                        }
-                    }
-                }
-            }
         } catch {
             print("Error performing fetch: \(error)")
         }
 
         updateBarButton()
+        reloadWeatherData()
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "weatherLocationDidReloadData:", name: WeatherLocationDidReloadDataNotification, object: nil)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: WeatherLocationDidReloadDataNotification, object: nil)
+    }
+
+    func weatherLocationDidReloadData(notification: NSNotification) {
+        guard let weatherLocation = notification.object as? WeatherLocation else { return }
+        reloadCellForWeatherLocation(weatherLocation)
+    }
+
+    private func reloadCellForWeatherLocation(weatherLocation: WeatherLocation) {
+        guard let indexPath = fetchedResultsController.indexPathForObject(weatherLocation) else { return }
+
+        collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -162,6 +172,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
             navigationItem.leftBarButtonItem?.enabled = selectedWeatherLocations.count > 0
             navigationItem.leftBarButtonItem?.tintColor = .redColor()
         } else {
+            // TODO: Change this for an activity indicator when reloading data
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "reloadWeatherData")
             // Only enable reload button when there are added weather locations
             navigationItem.leftBarButtonItem?.enabled = collectionView?.numberOfSections() > 1
@@ -169,7 +180,17 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     }
 
     func reloadWeatherData() {
-        // TODO: Implement
+        if let weatherLocations = fetchedResultsController.fetchedObjects as? [WeatherLocation] {
+            for weatherLocation in weatherLocations {
+                guard weatherLocation.isLoadingData == false else { return }
+
+                // TOOD: Check for stale data (e.g., > 10 minutes old)
+                if weatherLocation.lastUpdated == nil {
+                    weatherLocation.reloadData()
+                    reloadCellForWeatherLocation(weatherLocation)
+                }
+            }
+        }
     }
 
     func deleteSelectedItems() {

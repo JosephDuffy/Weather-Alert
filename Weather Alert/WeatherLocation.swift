@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import Alamofire
 
+let WeatherLocationDidReloadDataNotification = "WeatherLocationDidReloadData"
+
 class WeatherLocation: NSManagedObject {
 
     var lastUpdated: NSDate?
@@ -63,10 +65,8 @@ class WeatherLocation: NSManagedObject {
     private(set) var isLoadingData = false
     private weak var activeRequest: Request?
 
-    func reloadData(callback: ((NSError?) -> Void)?) {
-        if let activeRequest = activeRequest {
-            activeRequest.cancel()
-        }
+    func reloadData() {
+        guard activeRequest == nil else { return }
 
         let request = Alamofire.request(.GET, "http://api.openweathermap.org/data/2.5/weather", parameters: [
             "id": self.cityId!.integerValue,
@@ -110,14 +110,14 @@ class WeatherLocation: NSManagedObject {
 
                     self?.lastUpdated = NSDate()
                     self?.isLoadingData = false
-                    callback?(nil)
+
+                    NSNotificationCenter.defaultCenter().postNotificationName(WeatherLocationDidReloadDataNotification, object: self)
                 } else {
                     print("Failed to get JSON data")
                     // TODO: Call callback with error
                 }
             case .Failure(let error):
                 print("Request failed with error: \(error)")
-                callback?(error)
             }
         }
     }
