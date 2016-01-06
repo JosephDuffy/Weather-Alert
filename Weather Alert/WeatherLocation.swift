@@ -129,7 +129,6 @@ class WeatherLocation: NSManagedObject {
                     NSNotificationCenter.defaultCenter().postNotificationName(WeatherLocationDidReloadDataNotification, object: self)
                 } else {
                     print("Failed to get JSON data")
-                    // TODO: Call callback with error
                 }
             case .Failure(let error):
                 print("Request failed with error: \(error)")
