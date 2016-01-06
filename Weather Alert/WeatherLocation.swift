@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yetii Ltd. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 import Alamofire
 
@@ -15,6 +15,7 @@ class WeatherLocation: NSManagedObject {
     var lastUpdated: NSDate?
     var windSpeed: Float?
     var windDegree: Float?
+    var weathers: [Weather]?
 
     var displayName: String {
         return "\(self.name!), \(self.country!)"
@@ -95,6 +96,18 @@ class WeatherLocation: NSManagedObject {
                         self?.temperature = NSNumber(float: temperature)
                     }
 
+
+                    if let weathersData = data["weather"] as? [[String : AnyObject]] {
+                        var weathers = [Weather]()
+                        for weatherData in weathersData {
+                            if let weather = Weather(data: weatherData) {
+                                weathers.append(weather)
+                            }
+                        }
+                        
+                        self?.weathers = weathers
+                    }
+
                     self?.lastUpdated = NSDate()
                     self?.isLoadingData = false
                     callback?(nil)
@@ -131,10 +144,10 @@ extension WeatherLocation {
         newWeatherLocation.windSpeed = windSpeed
         newWeatherLocation.windDegree = windDegree
 
-        var weathers = Set<Weather>()
+        var weathers = [Weather]()
         for weatherData in weathersData {
-            if let weather = Weather.fromData(weatherData) {
-                weathers.insert(weather)
+            if let weather = Weather(data: weatherData) {
+                weathers.append(weather)
             }
         }
 

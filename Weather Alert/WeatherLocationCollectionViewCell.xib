@@ -20,40 +20,60 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%wind%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="CGS-0w-Ynz">
-                        <rect key="frame" x="8" y="171" width="184" height="21"/>
+                        <rect key="frame" x="8" y="171.5" width="184" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%temperature%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQV-3u-Biq">
-                        <rect key="frame" x="8" y="143" width="184" height="21"/>
+                        <rect key="frame" x="8" y="143" width="184" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-at-mJS">
-                        <rect key="frame" x="90" y="73" width="20" height="20"/>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-at-mJS">
+                        <rect key="frame" x="90" y="90" width="20" height="20"/>
                     </activityIndicatorView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r0D-xt-CGX">
+                        <rect key="frame" x="8" y="66" width="184" height="69"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%weather%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="ngp-RJ-p1d">
+                        <rect key="frame" x="8" y="37" width="184" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="fQV-3u-Biq" firstAttribute="top" secondItem="r0D-xt-CGX" secondAttribute="bottom" constant="8" symbolic="YES" id="00P-Zw-udc"/>
+                <constraint firstItem="ngp-RJ-p1d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="11N-L9-KcU"/>
                 <constraint firstItem="zk3-Rb-aXX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="18C-yb-1ID"/>
                 <constraint firstAttribute="trailing" secondItem="zk3-Rb-aXX" secondAttribute="trailing" constant="8" id="2tp-Mc-h58"/>
+                <constraint firstItem="r0D-xt-CGX" firstAttribute="top" secondItem="ngp-RJ-p1d" secondAttribute="bottom" constant="8" symbolic="YES" id="5JP-s0-vsF"/>
                 <constraint firstAttribute="trailing" secondItem="fQV-3u-Biq" secondAttribute="trailing" constant="8" id="7vV-kb-x5h"/>
+                <constraint firstItem="r0D-xt-CGX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="8W0-Ev-zL9"/>
                 <constraint firstItem="zk3-Rb-aXX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Gja-8q-vpr"/>
                 <constraint firstAttribute="bottom" secondItem="CGS-0w-Ynz" secondAttribute="bottom" constant="8" id="PZ0-4k-x2f"/>
                 <constraint firstItem="CGS-0w-Ynz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="QlS-Z3-XKG"/>
+                <constraint firstItem="Ibc-at-mJS" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Qrm-TN-iGj"/>
+                <constraint firstAttribute="trailing" secondItem="r0D-xt-CGX" secondAttribute="trailing" constant="8" id="UhB-Ig-5JQ"/>
+                <constraint firstItem="Ibc-at-mJS" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="fxR-QN-cQf"/>
+                <constraint firstAttribute="trailing" secondItem="ngp-RJ-p1d" secondAttribute="trailing" constant="8" id="kv9-12-KrT"/>
                 <constraint firstAttribute="trailing" secondItem="CGS-0w-Ynz" secondAttribute="trailing" constant="8" id="obZ-vg-S6y"/>
                 <constraint firstItem="CGS-0w-Ynz" firstAttribute="top" secondItem="fQV-3u-Biq" secondAttribute="bottom" constant="8" symbolic="YES" id="tzw-nY-EFt"/>
                 <constraint firstItem="fQV-3u-Biq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="uGg-Cj-Kym"/>
+                <constraint firstItem="ngp-RJ-p1d" firstAttribute="top" secondItem="zk3-Rb-aXX" secondAttribute="bottom" constant="8" symbolic="YES" id="uVJ-6E-Gq0"/>
             </constraints>
             <size key="customSize" width="200" height="200"/>
             <connections>
                 <outlet property="activityIndicator" destination="Ibc-at-mJS" id="Wte-3t-aNt"/>
+                <outlet property="imageView" destination="r0D-xt-CGX" id="Usp-PU-nbx"/>
                 <outlet property="locationNameLabel" destination="zk3-Rb-aXX" id="0Ac-SU-F1a"/>
                 <outlet property="speedLabel" destination="CGS-0w-Ynz" id="cDS-Bb-8nD"/>
                 <outlet property="temperatureLabel" destination="fQV-3u-Biq" id="5oE-RT-FnW"/>
+                <outlet property="weatherLabel" destination="ngp-RJ-p1d" id="3p8-6Q-uQb"/>
             </connections>
             <point key="canvasLocation" x="462" y="430"/>
         </collectionViewCell>

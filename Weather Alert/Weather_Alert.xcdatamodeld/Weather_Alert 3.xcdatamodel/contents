@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
-    <entity name="Weather" representedClassName=".Weather" syncable="YES">
-        <attribute name="descriptionText" attributeType="String" syncable="YES"/>
-        <attribute name="icon" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="Integer 32" syncable="YES"/>
-        <attribute name="main" attributeType="String" syncable="YES"/>
-        <relationship name="weatherLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeatherLocation" inverseName="weathers" inverseEntity="WeatherLocation" syncable="YES"/>
-    </entity>
     <entity name="WeatherLocation" representedClassName=".WeatherLocation" syncable="YES">
         <attribute name="cityId" attributeType="Integer 32" indexed="YES" syncable="YES"/>
         <attribute name="country" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="temperature" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="weathers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Weather" inverseName="weatherLocation" inverseEntity="Weather" syncable="YES"/>
     </entity>
     <elements>
-        <element name="WeatherLocation" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Weather" positionX="-63" positionY="9" width="128" height="120"/>
+        <element name="WeatherLocation" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

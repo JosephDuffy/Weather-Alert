@@ -11,6 +11,8 @@ import UIKit
 class WeatherLocationCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var locationNameLabel: UILabel!
+    @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
@@ -30,6 +32,22 @@ class WeatherLocationCollectionViewCell: UICollectionViewCell {
         if let weatherLocation = self.weatherLocation {
             weatherLocation.isLoadingData ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
 
+            if let weather = weatherLocation.weathers?.first {
+                weatherLabel.text = weather.descriptionText
+
+                if let image = weather.image {
+                    imageView.image = image
+                } else {
+                    weather.loadImage {[weak self] image, error in
+                        if let image = image {
+                            self?.imageView.image = image
+                        }
+                    }
+                }
+            } else {
+                weatherLabel.text = "--"
+            }
+
             // Units are in metric. See: http://openweathermap.org/weather-data
 
             locationNameLabel.text = weatherLocation.name ?? "--"
@@ -42,6 +60,7 @@ class WeatherLocationCollectionViewCell: UICollectionViewCell {
             } else {
                 speedLabel.text = "--"
             }
+
             if let temperature = weatherLocation.temperature {
                 temperatureLabel.text = "\(temperature)°C"
             } else {

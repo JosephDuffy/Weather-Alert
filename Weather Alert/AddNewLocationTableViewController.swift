@@ -52,10 +52,6 @@ class AddNewLocationTableViewController: UITableViewController {
                 // Add the chosen city to the managed object context so that
                 // it is saved
                 CoreDataManager.sharedInstance.managedObjectContext.insertObject(city)
-                // Also add the weathers
-                for weather in city.weathers as! Set<Weather> {
-                    CoreDataManager.sharedInstance.managedObjectContext.insertObject(weather)
-                }
 
                 do {
                     try CoreDataManager.sharedInstance.managedObjectContext.save()
