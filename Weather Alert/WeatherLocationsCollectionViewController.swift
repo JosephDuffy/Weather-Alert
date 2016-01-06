@@ -78,19 +78,24 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell: UICollectionViewCell
+
         let itemsInSection = self.collectionView?.numberOfItemsInSection(indexPath.section) ?? 0
         if indexPath.row == itemsInSection - 1 {
             // Last item in section
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddNewWeatherLocationReuseIdentifier, forIndexPath: indexPath)
-
-            return cell
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddNewWeatherLocationReuseIdentifier, forIndexPath: indexPath)
         } else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(WeatherLocationReuseIdentifier, forIndexPath: indexPath) as! WeatherLocationCollectionViewCell
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(WeatherLocationReuseIdentifier, forIndexPath: indexPath) as! WeatherLocationCollectionViewCell
         
-            cell.weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation
-        
-            return cell
+            (cell as! WeatherLocationCollectionViewCell).weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation
         }
+
+        cell.layer.cornerRadius = 20
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 5
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+
+        return cell
     }
 
     // MARK: UICollectionViewDelegate

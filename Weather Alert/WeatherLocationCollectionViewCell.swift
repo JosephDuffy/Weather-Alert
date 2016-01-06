@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherLocationCollectionViewCell: UICollectionViewCell {
+class WeatherLocationCollectionViewCell: MainScreenCollectionViewCell {
 
     @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!

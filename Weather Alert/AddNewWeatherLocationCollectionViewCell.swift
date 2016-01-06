@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewWeatherLocationCollectionViewCell: UICollectionViewCell {
+class AddNewWeatherLocationCollectionViewCell: MainScreenCollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
