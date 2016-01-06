@@ -96,7 +96,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     // MARK: UICollectionViewDelegate
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: 150, height: 150)
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
