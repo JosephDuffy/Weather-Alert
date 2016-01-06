@@ -60,6 +60,7 @@ class WeatherLocationViewController: UIViewController {
                 windLabel.text = "--"
             }
 
+            mapView.hidden = false
             // Remove all annotations
             mapView.removeAnnotations(mapView.annotations)
 
@@ -75,7 +76,7 @@ class WeatherLocationViewController: UIViewController {
             mapView.hidden = true
             temperatureWeatherDescriptionLabel.text = nil
             windLabel.text = nil
-            navigationItem.title = nil
+            navigationItem.title = "No Location Selected"
         }
     }
 
