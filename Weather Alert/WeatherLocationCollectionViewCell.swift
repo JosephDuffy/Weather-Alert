@@ -34,7 +34,11 @@ class WeatherLocationCollectionViewCell: UICollectionViewCell {
 
             locationNameLabel.text = weatherLocation.name ?? "--"
             if let windSpeed = weatherLocation.windSpeed {
-                speedLabel.text = "\(windSpeed) m/s"
+                if let compassDesignation = weatherLocation.compassDesignation {
+                    speedLabel.text = "\(compassDesignation) - \(windSpeed) m/s"
+                } else {
+                    speedLabel.text = "\(windSpeed) m/s"
+                }
             } else {
                 speedLabel.text = "--"
             }
