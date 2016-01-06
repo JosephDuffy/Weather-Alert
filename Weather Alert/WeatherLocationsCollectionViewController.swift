@@ -15,6 +15,7 @@ private let AddNewWeatherLocationReuseIdentifier = "AddNewWeatherLocationCell"
 class WeatherLocationsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     private var fetchedResultsController: NSFetchedResultsController!
+    private var selectedWeatherLocations = Set<WeatherLocation>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,8 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 
         self.collectionView?.registerNib(UINib(nibName: "WeatherLocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: WeatherLocationReuseIdentifier)
         self.collectionView?.registerNib(UINib(nibName: "AddNewWeatherLocationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: AddNewWeatherLocationReuseIdentifier)
+
+        navigationItem.rightBarButtonItem = editButtonItem()
 
         let fetchRequest = NSFetchRequest(entityName: "WeatherLocation")
         fetchRequest.sortDescriptors = [
@@ -52,6 +55,8 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
         } catch {
             print("Error performing fetch: \(error)")
         }
+
+        updateBarButton()
     }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -67,22 +72,24 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return (self.fetchedResultsController.sections?.count ?? 0) + 1
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // Always return 1 more than the actual number of fetched items to ensure the "add new location"
-        // cell will always be displayed
-        return (self.fetchedResultsController.sections?[section].numberOfObjects ?? 0) + 1
+        if section == (self.fetchedResultsController.sections?.count ?? 0) {
+            // Add new location section
+            return 1
+        } else {
+            return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        }
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell
 
-        let itemsInSection = self.collectionView?.numberOfItemsInSection(indexPath.section) ?? 0
-        if indexPath.row == itemsInSection - 1 {
-            // Last item in section
+        if indexPath.section == collectionView.numberOfSections() - 1 {
+            // Add new location section
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddNewWeatherLocationReuseIdentifier, forIndexPath: indexPath)
         } else {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(WeatherLocationReuseIdentifier, forIndexPath: indexPath) as! WeatherLocationCollectionViewCell
@@ -105,14 +112,73 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let itemsInSection = self.collectionView?.numberOfItemsInSection(indexPath.section) ?? 0
-
-        if indexPath.row == itemsInSection - 1 {
-            // Show the add new location interface
-            performSegueWithIdentifier("ShowAddNewWeatherLocation", sender: nil)
-        } else if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
-            performSegueWithIdentifier("ShowWeatherLocation", sender: weatherLocation)
+        if editing {
+            if indexPath.section == collectionView.numberOfSections() - 1 {
+                // Don't allow selection of add new cell
+                collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            } else if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
+                selectedWeatherLocations.insert(weatherLocation)
+                updateBarButton()
+            }
+        } else {
+            if indexPath.section == collectionView.numberOfSections() - 1 {
+                // Show the add new location interface
+                performSegueWithIdentifier("ShowAddNewWeatherLocation", sender: nil)
+            } else if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
+                performSegueWithIdentifier("ShowWeatherLocation", sender: weatherLocation)
+            }
         }
+    }
+
+    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        if editing {
+            if indexPath.section != collectionView.numberOfSections() - 1 {
+                if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
+                    selectedWeatherLocations.remove(weatherLocation)
+                    updateBarButton()
+                }
+            }
+        }
+    }
+
+    // MARK:- Management
+
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+
+        if !editing {
+            selectedWeatherLocations = []
+        }
+
+        collectionView?.allowsMultipleSelection = editing
+
+        updateBarButton()
+    }
+
+    private func updateBarButton() {
+        if editing {
+            let title = selectedWeatherLocations.count < 2 ? "Delete" : "Delete \(selectedWeatherLocations.count)"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: "deleteSelectedItems")
+            navigationItem.leftBarButtonItem?.enabled = selectedWeatherLocations.count > 0
+            navigationItem.leftBarButtonItem?.tintColor = .redColor()
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "reloadWeatherData")
+            // Only enable reload button when there are added weather locations
+            navigationItem.leftBarButtonItem?.enabled = collectionView?.numberOfSections() > 1
+        }
+    }
+
+    func reloadWeatherData() {
+        // TODO: Implement
+    }
+
+    func deleteSelectedItems() {
+        for selectedWeatherLocation in selectedWeatherLocations {
+            CoreDataManager.sharedInstance.managedObjectContext.deleteObject(selectedWeatherLocation)
+        }
+        CoreDataManager.sharedInstance.saveContext()
+
+        setEditing(false, animated: true)
     }
 
 }
