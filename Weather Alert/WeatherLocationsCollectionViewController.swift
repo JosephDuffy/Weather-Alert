@@ -16,6 +16,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 
     private var fetchedResultsController: NSFetchedResultsController!
     private var selectedWeatherLocations = Set<WeatherLocation>()
+    private var pendingChangesBlockOperations: [NSBlockOperation] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,24 +83,19 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return (self.fetchedResultsController.sections?.count ?? 0) + 1
+        return  1
     }
 
-
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == (self.fetchedResultsController.sections?.count ?? 0) {
-            // Add new location section
-            return 1
-        } else {
-            return self.fetchedResultsController.sections?[section].numberOfObjects ?? 0
-        }
+        // +1 for Add New cell
+        return (self.fetchedResultsController.sections?[section].numberOfObjects ?? 0) + 1
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell: UICollectionViewCell
 
-        if indexPath.section == collectionView.numberOfSections() - 1 {
-            // Add new location section
+        if indexPathIsForAddNewCell(indexPath) {
+            // Add new location cell
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddNewWeatherLocationReuseIdentifier, forIndexPath: indexPath)
         } else {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier(WeatherLocationReuseIdentifier, forIndexPath: indexPath) as! WeatherLocationCollectionViewCell
@@ -123,7 +119,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if editing {
-            if indexPath.section == collectionView.numberOfSections() - 1 {
+            if indexPathIsForAddNewCell(indexPath) {
                 // Don't allow selection of add new cell
                 collectionView.deselectItemAtIndexPath(indexPath, animated: false)
             } else if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
@@ -131,7 +127,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
                 updateBarButton()
             }
         } else {
-            if indexPath.section == collectionView.numberOfSections() - 1 {
+            if indexPathIsForAddNewCell(indexPath) {
                 // Show the add new location interface
                 performSegueWithIdentifier("ShowAddNewWeatherLocation", sender: nil)
                 collectionView.deselectItemAtIndexPath(indexPath, animated: true)
@@ -143,7 +139,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 
     override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         if editing {
-            if indexPath.section != collectionView.numberOfSections() - 1 {
+            if !indexPathIsForAddNewCell(indexPath) {
                 if let weatherLocation = self.fetchedResultsController.objectAtIndexPath(indexPath) as? WeatherLocation {
                     selectedWeatherLocations.remove(weatherLocation)
                     updateBarButton()
@@ -153,6 +149,10 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
     }
 
     // MARK:- Management
+
+    private func indexPathIsForAddNewCell(indexPath: NSIndexPath) -> Bool {
+        return indexPath.row == (fetchedResultsController.fetchedObjects?.count ?? 0)
+    }
 
     private func setDisplayedWeatherLocation(weatherLocation: WeatherLocation?) {
         if let navigationController = splitViewController?.viewControllers.last as? UINavigationController where splitViewController?.viewControllers.count == 2 {
@@ -231,13 +231,42 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
 }
 
 extension WeatherLocationsCollectionViewController: NSFetchedResultsControllerDelegate {
+
+    /**
+     This block operation code is used to fix a crash when multiple changes are
+     performed in one action, such as deleting 2 items. This pattern is found
+     is multiple places, but the first time this was shown appears to be from
+     https://gist.github.com/iwasrobbed/5528897. This is a modified (and converted
+     to swift) version of that code
+    */
+
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        pendingChangesBlockOperations = []
+    }
+
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        collectionView?.performBatchUpdates({ () -> Void in
+            for operation in self.pendingChangesBlockOperations {
+                operation.start()
+            }
+            }, completion: { finished in
+                if finished {
+                    self.pendingChangesBlockOperations = []
+                    self.updateBarButton()
+                }
+        })
+    }
+
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            self.collectionView?.insertItemsAtIndexPaths([newIndexPath!])
-            updateBarButton()
+            pendingChangesBlockOperations.append(NSBlockOperation(block: {
+                self.collectionView?.insertItemsAtIndexPaths([newIndexPath!])
+            }))
         case .Delete:
-            self.collectionView?.deleteItemsAtIndexPaths([indexPath!])
+            pendingChangesBlockOperations.append(NSBlockOperation(block: {
+                self.collectionView?.deleteItemsAtIndexPaths([indexPath!])
+            }))
 
             if let navigationController = splitViewController?.viewControllers.last as? UINavigationController where splitViewController?.viewControllers.count == 2 {
                 // Set directly
@@ -249,21 +278,27 @@ extension WeatherLocationsCollectionViewController: NSFetchedResultsControllerDe
                     }
                 }
             }
-
-            updateBarButton()
         case .Move:
-            self.collectionView?.moveItemAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
+            pendingChangesBlockOperations.append(NSBlockOperation(block: {
+                self.collectionView?.moveItemAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
+            }))
         case .Update:
-            self.collectionView?.reloadItemsAtIndexPaths([indexPath!])
+            pendingChangesBlockOperations.append(NSBlockOperation(block: {
+                self.collectionView?.reloadItemsAtIndexPaths([indexPath!])
+            }))
         }
     }
 
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .Insert:
-            self.collectionView?.insertSections(NSIndexSet(index: sectionIndex))
+            pendingChangesBlockOperations.append(NSBlockOperation(block: {
+                self.collectionView?.insertSections(NSIndexSet(index: sectionIndex))
+            }))
         case .Delete:
-            self.collectionView?.deleteSections(NSIndexSet(index: sectionIndex))
+            pendingChangesBlockOperations.append(NSBlockOperation(block: {
+                self.collectionView?.deleteSections(NSIndexSet(index: sectionIndex))
+            }))
         case .Move, .Update:
             break
         }
