@@ -37,12 +37,12 @@ class WeatherLocationViewController: UIViewController {
             // Remove all annotations
             mapView.removeAnnotations(mapView.annotations)
 
-            if let location = weatherLocation.location {
-                let region = MKCoordinateRegionMakeWithDistance(location, 50000, 50000)
+            if let coordinate = weatherLocation.coordinate {
+                let region = MKCoordinateRegionMakeWithDistance(coordinate, 50000, 50000)
                 mapView.setRegion(region, animated: true)
 
                 let pin = MKPointAnnotation()
-                pin.coordinate = location
+                pin.coordinate = coordinate
                 mapView.addAnnotation(pin)
             }
 

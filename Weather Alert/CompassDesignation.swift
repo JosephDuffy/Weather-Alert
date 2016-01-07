@@ -7,8 +7,10 @@
 //
 
 import Foundation
-import MapKit
 
+/**
+ A designation on a compass, such as North, West, or South East.
+*/
 enum CompassDesignation {
     case North
     case NorthEast
@@ -56,6 +58,7 @@ enum CompassDesignation {
         }
     }
 
+    /// The full name for the compass designation, such as "North East"
     var name: String {
         switch self {
         case .North:
@@ -77,6 +80,8 @@ enum CompassDesignation {
         }
     }
 
+    /// The short name for the compass designation, such "N" for "North"
+    /// and "SE" for "South East"
     var shortName: String {
         switch self {
         case .North:

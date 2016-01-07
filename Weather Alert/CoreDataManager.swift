@@ -8,6 +8,11 @@
 
 import CoreData
 
+/**
+ A convenience singleton for storing required objects for using Core Data. Handles
+ the logic for the creation of the managed object model, persisted store coordinator,
+ and the managed object context. Also provided a convenience method for saving the MOC.
+*/
 class CoreDataManager {
 
     static let sharedInstance = CoreDataManager()
