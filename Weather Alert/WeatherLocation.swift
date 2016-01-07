@@ -16,6 +16,7 @@ let WeatherLocationDidReloadDataNotification = "WeatherLocationDidReloadData"
 class WeatherLocation: NSManagedObject {
 
     var lastUpdated: NSDate?
+    var temperature: Double?
     var windSpeed: Double?
     var windDegree: Double?
     var weathers: [Weather]?
@@ -67,8 +68,8 @@ class WeatherLocation: NSManagedObject {
                         }
                     }
 
-                    if let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Float {
-                        self?.temperature = NSNumber(float: temperature)
+                    if let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Double {
+                        self?.temperature = temperature
                     }
 
 
@@ -109,7 +110,7 @@ extension WeatherLocation {
         guard let id = data["id"] as? Int else { return nil }
         guard let name = data["name"] as? String else { return nil }
         guard let country = (data["sys"] as? [String: String])?["country"] else { return nil }
-        guard let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Float else { return nil }
+        guard let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Double else { return nil }
         guard let windData = data["wind"] as? [String: Double] else { return nil }
         guard let windDegree = windData["deg"] else { return nil }
         guard let windSpeed = windData["speed"] else { return nil }
