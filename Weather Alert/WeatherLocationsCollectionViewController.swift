@@ -253,11 +253,9 @@ extension WeatherLocationsCollectionViewController: NSFetchedResultsControllerDe
             for operation in self.pendingChangesBlockOperations {
                 operation.start()
             }
-            }, completion: { finished in
-                if finished {
-                    self.pendingChangesBlockOperations = []
-                    self.updateBarButton()
-                }
+            }, completion: { _ in
+                self.pendingChangesBlockOperations = []
+                self.updateBarButton()
         })
     }
 
