@@ -18,7 +18,6 @@
 		D9F2E0BD1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */; };
 		D9F2E0BF1C3BDF30003D64DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0BE1C3BDF30003D64DE /* Assets.xcassets */; };
 		D9F2E0C21C3BDF30003D64DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0C01C3BDF30003D64DE /* LaunchScreen.storyboard */; };
-		D9F2E0CD1C3BDF30003D64DE /* Weather_AlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0CC1C3BDF30003D64DE /* Weather_AlertTests.swift */; };
 		D9F2E0E21C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0E01C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift */; };
 		D9F2E0E31C3BE29F003D64DE /* WeatherLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0E11C3BE29F003D64DE /* WeatherLocation.swift */; };
 		D9F2E0E61C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0E41C3BE2F5003D64DE /* WeatherLocationCollectionViewCell.swift */; };
@@ -83,7 +82,6 @@
 		D9F2E0C11C3BDF30003D64DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9F2E0C31C3BDF30003D64DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9F2E0C81C3BDF30003D64DE /* Weather AlertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather AlertTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9F2E0CC1C3BDF30003D64DE /* Weather_AlertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AlertTests.swift; sourceTree = "<group>"; };
 		D9F2E0CE1C3BDF30003D64DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9F2E0E01C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeatherLocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D9F2E0E11C3BE29F003D64DE /* WeatherLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherLocation.swift; sourceTree = "<group>"; };
@@ -175,9 +173,8 @@
 		D9F2E0CB1C3BDF30003D64DE /* Weather AlertTests */ = {
 			isa = PBXGroup;
 			children = (
-				D9F2E0CC1C3BDF30003D64DE /* Weather_AlertTests.swift */,
-				D9F2E0CE1C3BDF30003D64DE /* Info.plist */,
 				D99EDBD41C3EAC9F00AB4C15 /* CompassDesignationTests.swift */,
+				D9F2E0CE1C3BDF30003D64DE /* Info.plist */,
 			);
 			path = "Weather AlertTests";
 			sourceTree = "<group>";
@@ -391,7 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D99EDBD51C3EAC9F00AB4C15 /* CompassDesignationTests.swift in Sources */,
-				D9F2E0CD1C3BDF30003D64DE /* Weather_AlertTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,15 +12,10 @@ class Weather_AlertUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
     override func tearDown() {
@@ -28,7 +23,7 @@ class Weather_AlertUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testExampleWorkflow() {
         let app = XCUIApplication()
         let collectionViewsQuery = app.collectionViews
 
@@ -43,11 +38,10 @@ class Weather_AlertUITests: XCTestCase {
 
         let addNewCell = collectionViewsQuery.cells.staticTexts["Add New"]
         addNewCell.tap()
-
-        app.tables["Empty list"].segmentedControls["scopeBar"].childrenMatchingType(.Button).matchingIdentifier("Title").elementBoundByIndex(1).tap()
         
         let tablesQuery = app.tables
         let locationNameSearchField = tablesQuery.searchFields["Location Name"]
+        locationNameSearchField.tap()
         locationNameSearchField.typeText("london")
         tablesQuery.cells.staticTexts["London, GB"].tap()
 
