@@ -10,6 +10,7 @@
 		D91D409E1C3D7275004CEE81 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D409C1C3D7275004CEE81 /* Weather.swift */; };
 		D91D40A41C3D8831004CEE81 /* MainScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D40A31C3D8831004CEE81 /* MainScreenCollectionViewCell.swift */; };
 		D91D40A61C3D8B34004CEE81 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91D40A51C3D8B34004CEE81 /* MapKit.framework */; };
+		D91D40AE1C3E8BAC004CEE81 /* Weather_AlertUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D40AD1C3E8BAC004CEE81 /* Weather_AlertUITests.swift */; };
 		D9F2E0B51C3BDF30003D64DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0B41C3BDF30003D64DE /* AppDelegate.swift */; };
 		D9F2E0BA1C3BDF30003D64DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0B81C3BDF30003D64DE /* Main.storyboard */; };
 		D9F2E0BD1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */; };
@@ -32,6 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D91D40B01C3E8BAC004CEE81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9F2E0A91C3BDF30003D64DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9F2E0B01C3BDF30003D64DE;
+			remoteInfo = "Weather Alert";
+		};
 		D9F2E0C91C3BDF30003D64DE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D9F2E0A91C3BDF30003D64DE /* Project object */;
@@ -60,6 +68,9 @@
 		D91D409C1C3D7275004CEE81 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		D91D40A31C3D8831004CEE81 /* MainScreenCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 		D91D40A51C3D8B34004CEE81 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D91D40AB1C3E8BAC004CEE81 /* Weather AlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather AlertUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91D40AD1C3E8BAC004CEE81 /* Weather_AlertUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AlertUITests.swift; sourceTree = "<group>"; };
+		D91D40AF1C3E8BAC004CEE81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9F2E0B11C3BDF30003D64DE /* Weather Alert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Alert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F2E0B41C3BDF30003D64DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F2E0B91C3BDF30003D64DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -86,6 +97,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D91D40A81C3E8BAC004CEE81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9F2E0AE1C3BDF30003D64DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -105,11 +123,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D91D40AC1C3E8BAC004CEE81 /* Weather AlertUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D91D40AD1C3E8BAC004CEE81 /* Weather_AlertUITests.swift */,
+				D91D40AF1C3E8BAC004CEE81 /* Info.plist */,
+			);
+			path = "Weather AlertUITests";
+			sourceTree = "<group>";
+		};
 		D9F2E0A81C3BDF30003D64DE = {
 			isa = PBXGroup;
 			children = (
 				D9F2E0B31C3BDF30003D64DE /* Weather Alert */,
 				D9F2E0CB1C3BDF30003D64DE /* Weather AlertTests */,
+				D91D40AC1C3E8BAC004CEE81 /* Weather AlertUITests */,
 				D9F2E0B21C3BDF30003D64DE /* Products */,
 				D9F2E0F61C3BEF0D003D64DE /* Frameworks */,
 			);
@@ -120,6 +148,7 @@
 			children = (
 				D9F2E0B11C3BDF30003D64DE /* Weather Alert.app */,
 				D9F2E0C81C3BDF30003D64DE /* Weather AlertTests.xctest */,
+				D91D40AB1C3E8BAC004CEE81 /* Weather AlertUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,6 +224,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D91D40AA1C3E8BAC004CEE81 /* Weather AlertUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D91D40B21C3E8BAC004CEE81 /* Build configuration list for PBXNativeTarget "Weather AlertUITests" */;
+			buildPhases = (
+				D91D40A71C3E8BAC004CEE81 /* Sources */,
+				D91D40A81C3E8BAC004CEE81 /* Frameworks */,
+				D91D40A91C3E8BAC004CEE81 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D91D40B11C3E8BAC004CEE81 /* PBXTargetDependency */,
+			);
+			name = "Weather AlertUITests";
+			productName = "Weather AlertUITests";
+			productReference = D91D40AB1C3E8BAC004CEE81 /* Weather AlertUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		D9F2E0B01C3BDF30003D64DE /* Weather Alert */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9F2E0D11C3BDF30003D64DE /* Build configuration list for PBXNativeTarget "Weather Alert" */;
@@ -241,6 +288,10 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Yetii Ltd.";
 				TargetAttributes = {
+					D91D40AA1C3E8BAC004CEE81 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = D9F2E0B01C3BDF30003D64DE;
+					};
 					D9F2E0B01C3BDF30003D64DE = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -265,11 +316,19 @@
 			targets = (
 				D9F2E0B01C3BDF30003D64DE /* Weather Alert */,
 				D9F2E0C71C3BDF30003D64DE /* Weather AlertTests */,
+				D91D40AA1C3E8BAC004CEE81 /* Weather AlertUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D91D40A91C3E8BAC004CEE81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9F2E0AF1C3BDF30003D64DE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,6 +352,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D91D40A71C3E8BAC004CEE81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D91D40AE1C3E8BAC004CEE81 /* Weather_AlertUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9F2E0AD1C3BDF30003D64DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +390,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D91D40B11C3E8BAC004CEE81 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9F2E0B01C3BDF30003D64DE /* Weather Alert */;
+			targetProxy = D91D40B01C3E8BAC004CEE81 /* PBXContainerItemProxy */;
+		};
 		D9F2E0CA1C3BDF30003D64DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D9F2E0B01C3BDF30003D64DE /* Weather Alert */;
@@ -350,6 +422,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D91D40B31C3E8BAC004CEE81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Weather AlertUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.yetii.Weather-AlertUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Weather Alert";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		D91D40B41C3E8BAC004CEE81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Weather AlertUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.yetii.Weather-AlertUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Weather Alert";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		D9F2E0CF1C3BDF30003D64DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -490,6 +588,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D91D40B21C3E8BAC004CEE81 /* Build configuration list for PBXNativeTarget "Weather AlertUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D91D40B31C3E8BAC004CEE81 /* Debug */,
+				D91D40B41C3E8BAC004CEE81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D9F2E0AC1C3BDF30003D64DE /* Build configuration list for PBXProject "Weather Alert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

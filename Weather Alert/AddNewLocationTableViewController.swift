@@ -67,7 +67,6 @@ class AddNewLocationTableViewController: UITableViewController {
     func searchForText(text: String) {
         if let activeRequest = self.activeRequest {
             activeRequest.cancel()
-            self.activeRequest = nil
         }
 
         // API returns 404 for text < 3 characters

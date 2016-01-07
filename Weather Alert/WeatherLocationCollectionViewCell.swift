@@ -50,7 +50,7 @@ class WeatherLocationCollectionViewCell: MainScreenCollectionViewCell {
 
             // Units are in metric. See: http://openweathermap.org/weather-data
 
-            locationNameLabel.text = weatherLocation.name ?? "--"
+            locationNameLabel.text = weatherLocation.displayName
             if let windSpeed = weatherLocation.windSpeed {
                 if let compassDesignation = weatherLocation.compassDesignation {
                     speedLabel.text = "\(compassDesignation) - \(windSpeed) m/s"
