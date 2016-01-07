@@ -1,4 +1,4 @@
-# Weather Alert
+#Weather Alert
 
 Weather Alert is a basic iOS application for display weather and wind information. The data is provided pulled from the [OpenWeatherMap API](http://openweathermap.org/api).
 
