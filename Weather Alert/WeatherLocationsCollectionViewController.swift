@@ -199,7 +199,7 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
             navigationItem.leftBarButtonItem?.tintColor = .redColor()
         } else {
             // TODO: Change this for an activity indicator when reloading data
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "reloadWeatherData")
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: "reloadWeatherDataButtonTapped")
             // Only enable reload button when there are added weather locations
             navigationItem.leftBarButtonItem?.enabled = collectionView?.numberOfSections() > 1
 
@@ -209,13 +209,17 @@ class WeatherLocationsCollectionViewController: UICollectionViewController, UICo
         }
     }
 
-    func reloadWeatherData() {
+    func reloadWeatherDataButtonTapped() {
+        reloadWeatherData(force: true)
+    }
+
+    func reloadWeatherData(force force: Bool = false) {
         if let weatherLocations = fetchedResultsController.fetchedObjects as? [WeatherLocation] {
             for weatherLocation in weatherLocations {
                 guard weatherLocation.isLoadingData == false else { return }
 
                 // TOOD: Check for stale data (e.g., > 10 minutes old)
-                if weatherLocation.lastUpdated == nil {
+                if force || weatherLocation.lastUpdated == nil {
                     weatherLocation.reloadData()
                     reloadCellForWeatherLocation(weatherLocation)
                 }

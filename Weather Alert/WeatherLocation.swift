@@ -44,6 +44,7 @@ class WeatherLocation: NSManagedObject {
     func reloadData() {
         guard activeRequest == nil else { return }
 
+        isLoadingData = true
         let request = Alamofire.request(.GET, "http://api.openweathermap.org/data/2.5/weather", parameters: [
             "id": self.cityId!.integerValue,
             "units": "metric",
