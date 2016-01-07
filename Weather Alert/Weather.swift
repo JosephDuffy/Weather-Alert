@@ -51,6 +51,14 @@ final class Weather {
         self.icon = icon
     }
 
+    /**
+     Load the image for the weather icon. Image is loaded from OpenWeatherMap.
+     Image data requiest is performed on a background thread, but the callback will
+     always be performed on the main thread
+     
+     - Paramater: callback An optional callback to be called when the image load request
+                           has finished
+    */
     func loadImage(callback: ((UIImage?, NSError?) -> Void)?) {
         func performCallback(image image: UIImage?, error: NSError?) {
             dispatch_async(dispatch_get_main_queue()) {
@@ -63,7 +71,15 @@ final class Weather {
                 if let imageData = NSData(contentsOfURL: url) {
                     if let image = UIImage(data: imageData) {
                         performCallback(image: image, error: nil)
+                    } else {
+                        performCallback(image: nil, error: NSError(domain: "net.yetii.Weather-Alert", code: -1, userInfo: [
+                            NSLocalizedDescriptionKey: "Failed to decode data as an image"
+                            ]))
                     }
+                } else {
+                    performCallback(image: nil, error: NSError(domain: "net.yetii.Weather-Alert", code: -1, userInfo: [
+                        NSLocalizedDescriptionKey: "Failed to load image data from URL"
+                        ]))
                 }
             }
         }
