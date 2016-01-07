@@ -80,7 +80,7 @@ class WeatherLocationViewController: UIViewController {
 
             if let windSpeed = weatherLocation.windSpeed {
                 if let compassDesignation = weatherLocation.compassDesignation {
-                    windLabel.text = "\(compassDesignation) - \(windSpeed) m/s"
+                    windLabel.text = "\(compassDesignation.name) - \(windSpeed) m/s"
                 } else {
                     windLabel.text = "\(windSpeed) m/s"
                 }

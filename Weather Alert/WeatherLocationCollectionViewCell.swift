@@ -53,7 +53,7 @@ class WeatherLocationCollectionViewCell: MainScreenCollectionViewCell {
             locationNameLabel.text = weatherLocation.displayName
             if let windSpeed = weatherLocation.windSpeed {
                 if let compassDesignation = weatherLocation.compassDesignation {
-                    speedLabel.text = "\(compassDesignation) - \(windSpeed) m/s"
+                    speedLabel.text = "\(compassDesignation.shortName) - \(windSpeed) m/s"
                 } else {
                     speedLabel.text = "\(windSpeed) m/s"
                 }

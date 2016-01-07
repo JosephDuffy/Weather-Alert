@@ -11,6 +11,7 @@
 		D91D40A41C3D8831004CEE81 /* MainScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D40A31C3D8831004CEE81 /* MainScreenCollectionViewCell.swift */; };
 		D91D40A61C3D8B34004CEE81 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91D40A51C3D8B34004CEE81 /* MapKit.framework */; };
 		D91D40AE1C3E8BAC004CEE81 /* Weather_AlertUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D40AD1C3E8BAC004CEE81 /* Weather_AlertUITests.swift */; };
+		D99EDBD31C3EA78500AB4C15 /* CompassDesignation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99EDBD21C3EA78500AB4C15 /* CompassDesignation.swift */; };
 		D9F2E0B51C3BDF30003D64DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0B41C3BDF30003D64DE /* AppDelegate.swift */; };
 		D9F2E0BA1C3BDF30003D64DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9F2E0B81C3BDF30003D64DE /* Main.storyboard */; };
 		D9F2E0BD1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9F2E0BB1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld */; };
@@ -71,6 +72,7 @@
 		D91D40AB1C3E8BAC004CEE81 /* Weather AlertUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather AlertUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91D40AD1C3E8BAC004CEE81 /* Weather_AlertUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AlertUITests.swift; sourceTree = "<group>"; };
 		D91D40AF1C3E8BAC004CEE81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D99EDBD21C3EA78500AB4C15 /* CompassDesignation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassDesignation.swift; sourceTree = "<group>"; };
 		D9F2E0B11C3BDF30003D64DE /* Weather Alert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Alert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F2E0B41C3BDF30003D64DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F2E0B91C3BDF30003D64DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D9F2E0E01C3BE29F003D64DE /* WeatherLocation+CoreDataProperties.swift */,
 				D9F2E0E11C3BE29F003D64DE /* WeatherLocation.swift */,
 				D9F2E0EC1C3BE707003D64DE /* CoreDataManager.swift */,
+				D99EDBD21C3EA78500AB4C15 /* CompassDesignation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F2E0F01C3BE9EA003D64DE /* AddNewWeatherLocationCollectionViewCell.swift in Sources */,
+				D99EDBD31C3EA78500AB4C15 /* CompassDesignation.swift in Sources */,
 				D9F2E0EB1C3BE67F003D64DE /* WeatherLocationViewController.swift in Sources */,
 				D9F2E0BD1C3BDF30003D64DE /* Weather_Alert.xcdatamodeld in Sources */,
 				D91D409E1C3D7275004CEE81 /* Weather.swift in Sources */,
@@ -595,6 +599,7 @@
 				D91D40B41C3E8BAC004CEE81 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D9F2E0AC1C3BDF30003D64DE /* Build configuration list for PBXProject "Weather Alert" */ = {
 			isa = XCConfigurationList;

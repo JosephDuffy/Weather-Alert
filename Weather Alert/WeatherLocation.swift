@@ -16,8 +16,8 @@ let WeatherLocationDidReloadDataNotification = "WeatherLocationDidReloadData"
 class WeatherLocation: NSManagedObject {
 
     var lastUpdated: NSDate?
-    var windSpeed: Float?
-    var windDegree: Float?
+    var windSpeed: Double?
+    var windDegree: Double?
     var weathers: [Weather]?
     var location: CLLocationCoordinate2D? {
         if let latitude = self.latitude?.doubleValue, longitude = self.longitude?.doubleValue {
@@ -30,42 +30,9 @@ class WeatherLocation: NSManagedObject {
     var displayName: String {
         return "\(self.name!), \(self.country!)"
     }
-    var compassDesignation: String? {
+    var compassDesignation: CompassDesignation? {
         if let windDegree = self.windDegree {
-            // These calculation assume that the point where the compass
-            // designation changes is every 45 degrees. This is taken on the
-            // assumption that 0-22.5° is N, 22.5-67.5° is NE, 67.5-112.5° is E, etc.
-            let degreeIncrement: Float = 45
-            var degreeToCheckAgainst: Float = 22.5
-            var totalIterations = 0
-
-            while windDegree > degreeToCheckAgainst {
-                totalIterations += 1
-                degreeToCheckAgainst += degreeIncrement
-            }
-
-            switch totalIterations {
-            case 0:
-                return "N"
-            case 1:
-                return "NE"
-            case 2:
-                return "E"
-            case 3:
-                return "SE"
-            case 4:
-                return "S"
-            case 5:
-                return "SW"
-            case 6:
-                return "W"
-            case 7:
-                return "NW"
-            case 8:
-                return "N"
-            default:
-                return "??"
-            }
+            return CompassDesignation.compassDesignationForDegree(windDegree)
         } else {
             return nil
         }
@@ -90,7 +57,7 @@ class WeatherLocation: NSManagedObject {
             switch response.result {
             case .Success(let JSON):
                 if let data = JSON as? [String: AnyObject] {
-                    if let wind = data["wind"] as? [String : Float] {
+                    if let wind = data["wind"] as? [String : Double] {
                         if let windSpeed = wind["speed"] {
                             self?.windSpeed = windSpeed
                         }
@@ -143,7 +110,7 @@ extension WeatherLocation {
         guard let name = data["name"] as? String else { return nil }
         guard let country = (data["sys"] as? [String: String])?["country"] else { return nil }
         guard let temperature = (data["main"] as? [String: AnyObject])?["temp"] as? Float else { return nil }
-        guard let windData = data["wind"] as? [String: Float] else { return nil }
+        guard let windData = data["wind"] as? [String: Double] else { return nil }
         guard let windDegree = windData["deg"] else { return nil }
         guard let windSpeed = windData["speed"] else { return nil }
         guard let weathersData = data["weather"] as? [[String : AnyObject]] else { return nil }
